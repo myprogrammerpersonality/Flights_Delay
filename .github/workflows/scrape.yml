@@ -1,0 +1,22 @@
+name: Scrape
+
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  scrape-latest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2.0.0
+        with:
+          python-version: '3.8'
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run Scraper
+        run: python scraper.py
