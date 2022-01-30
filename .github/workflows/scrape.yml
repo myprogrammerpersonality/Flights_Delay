@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '50 20 * * *'
 
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+  
 jobs:
   scrape-latest:
     runs-on: ubuntu-latest
