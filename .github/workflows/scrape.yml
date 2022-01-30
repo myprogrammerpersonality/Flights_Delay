@@ -2,8 +2,7 @@ name: Scrape
 
 on:
   schedule:
-    - cron: "25 20 * * *"
-  workflow_dispatch:
+    - cron: '25 20 * * *'
 
 jobs:
   scrape-latest:
