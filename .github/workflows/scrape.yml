@@ -25,8 +25,8 @@ jobs:
       - name: Run Scraper
         run: python scraper.py
       
-      - name: switching from HTTPS to SSH
-        run: git remote set-url origin ${{ secrets.ssh }}
+      - name: add remote with Token
+        run: git remote add origin https://${{ secrets.SECRET_TOKEN }}@github.com/myprogrammerpersonality/Flights_Delay.git
       
       - name: check for changes
         run: git status
