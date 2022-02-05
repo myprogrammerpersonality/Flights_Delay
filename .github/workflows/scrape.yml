@@ -41,7 +41,7 @@ jobs:
         run: git add .
       
       - name: commit changed files
-        run: git commit -m "Auto updating Data"
+        run: git diff-index --quiet HEAD || git commit -m "Auto updating Data"
       
       - name: fetch from master
         run: git fetch origin master
