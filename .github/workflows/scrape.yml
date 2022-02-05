@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '0 21 * * *'
     - cron: '0 9 * * *'
+    - cron: '10 12 * * *'
 
 env:
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
