@@ -16,11 +16,10 @@ jobs:
       - name: Run Scraper
         run: python scraper.py
       
-      - name: Set Git email
-        run: git config --global user.email "aliyzd1379@gmail.com"
-
-      - name: Set Git name
-        run: git config --global user.name "Ali YZ"
+      - name: Set Git config
+        run: |
+          git config --global user.email "aliyzd1379@gmail.com"
+          git config --global user.name "Ali YZ"
         
       - name: remove origin
         run: git remote remove origin
