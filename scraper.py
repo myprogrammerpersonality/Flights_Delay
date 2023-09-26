@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime
 from logger import Logger
 import logging
-
+import time
 
 logger = Logger(__name__, loglevel=logging.INFO).get_logger()
 
@@ -75,7 +75,7 @@ class FlightScraper:
     def save_to_csv(self):
         flight_df = pd.DataFrame(self.flight_list)
         flight_df = flight_df[flight_df.flight_status == "پرواز كرد"]
-        flight_df['delay_min'] = flight_df.apply(lambda x: self._calc_delay(x['flight_day'], x['flight_real_date']), axis=1)
+        flight_df['delay_min'] = flight_df.apply(lambda x: self._calc_delay(x['flight_official_date'], x['flight_real_date']), axis=1)
         try:
             flights = pd.read_csv(DATA_FILE, encoding="utf-8")
             flights = pd.concat([flights, flight_df], axis=0)
@@ -92,3 +92,5 @@ if __name__ == "__main__":
     status = scraper.scrape_flights()
     if status:
         scraper.save_to_csv()
+
+time.sleep(3)
