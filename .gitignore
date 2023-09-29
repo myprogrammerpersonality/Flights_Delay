@@ -2,5 +2,3 @@
 *.ipynb
 .venv
 *.pyc
-city.json
-test.py
