@@ -31,4 +31,4 @@ def calc_delay(formal_time, real_time):
 
     formal_datetime = datetime.strptime(formal_time_str, '%H:%M')
 
-    return abs((real_datetime - formal_datetime).total_seconds() // 60)
+    return (real_datetime - formal_datetime).total_seconds() // 60
