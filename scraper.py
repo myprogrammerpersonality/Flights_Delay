@@ -96,7 +96,7 @@ if __name__ == "__main__":
 
     # Filter out not completed flights
     final_df = final_df.dropna(subset=["flight_real_date"])
-    final_df = final_df[final_df["flight_status"] == "پرواز کرد"]
+    final_df = final_df[final_df["flight_status"] == 'پرواز كرد']
 
     if not final_df.empty:
         final_df["flight_delay"] = final_df.apply(lambda x: calc_delay(x["flight_official_date"], x["flight_real_date"]), axis=1)
