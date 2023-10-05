@@ -1,4 +1,5 @@
 import requests
+import argparse
 from requests import RequestException
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -15,7 +16,7 @@ logger = Logger(__name__, loglevel=logging.INFO).get_logger()
 with open("urls.json", "r", encoding="utf-8") as f:
     CITY_URL_MAPPING = json.load(f)
 
-DATA_FILE = "C:/Users/aliyz/OneDrive/Desktop/Repos/Personal/Flights_Delay/flights.csv"
+DATA_FILE = "./flights.csv"
 
 class FlightScraper:
     def __init__(self, url, city):
@@ -79,6 +80,14 @@ class FlightScraper:
 
 
 if __name__ == "__main__":
+    # Define argument
+    parser = argparse.ArgumentParser(description='Override data file path.')
+    parser.add_argument('--path', type=str, help='Path to the file to be saved', default='./flights.csv')
+    args = parser.parse_args()
+
+    DATA_FILE = args.path
+    
+    # Scrape data
     flights_list = []
     for city, url in list(CITY_URL_MAPPING.items()):
         scraper = FlightScraper(url=url, city=city)
@@ -103,6 +112,7 @@ if __name__ == "__main__":
     else:
         final_df["flight_delay"] = None
 
+    # Save data
     try:
         flights = pd.read_csv(DATA_FILE, encoding="utf-8")
         flights = pd.concat([flights, final_df], axis=0)
@@ -112,5 +122,3 @@ if __name__ == "__main__":
     except FileNotFoundError:
         final_df.to_csv(DATA_FILE, index=False, encoding="utf-8")
         logger.info("A New File Created for Data!")   
-
-time.sleep(3)
