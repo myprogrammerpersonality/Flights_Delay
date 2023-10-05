@@ -30,14 +30,14 @@ class FlightScraper:
             try:
                 page = requests.get(self.url, timeout=10)
                 page.raise_for_status()  # Raise an HTTPError if the HTTP request returned an unsuccessful status code
-                logger.info("Data Fetched Successfully.")
+                logger.info(f"Data Fetched Successfully for {self.city}.")
                 return page.content
             except RequestException as e:
-                logger.error(f"Attempt { _ + 1 }: Error fetching the page content: {e}")
+                logger.error(f"Attempt { _ + 1 }: Error fetching the page content of city {self.city}: {e}")
                 if _ < max_retries - 1:  # Only sleep if we are going to retry
                     time.sleep(1)  # Sleep for a second before trying again, this can be adjusted
                 else:
-                    logger.error("Max retries reached. Giving up.")
+                    logger.error(f"Max retries reached. Giving up on {self.city}.")
                     return None
 
     @staticmethod
