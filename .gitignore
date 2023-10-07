@@ -1,6 +1,5 @@
 .ipynb_checkpoints/*
-*.ipynb
 .venv
 .venv-analysis
-analysis/*
+analysis/.server
 *.pyc
