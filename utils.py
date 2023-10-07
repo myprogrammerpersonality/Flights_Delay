@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import re
 from logger import Logger
 
@@ -30,5 +30,9 @@ def calc_delay(formal_time, real_time):
         real_datetime = datetime.strptime(real_time_str, '%H:%M:%S')
 
     formal_datetime = datetime.strptime(formal_time_str, '%H:%M')
+    
+    # Check if real_datetime is before formal_datetime and adjust for next day
+    if real_datetime < formal_datetime:
+        real_datetime += timedelta(days=1)
 
     return (real_datetime - formal_datetime).total_seconds() // 60
